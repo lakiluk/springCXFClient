@@ -7,8 +7,15 @@
   http://cxf.apache.org/jaxws jaxws.xsd">
 
 	<jaxws:client id="helloClient" serviceClass="service.HelloWorld"
-		address="http://localhost:8080/cxfstub/HelloWorld" />
-		
+		address="http://localhost:8080/cxfstub/HelloWorld">
+		<jaxws:inInterceptors>
+			<ref bean="logIn" />
+		</jaxws:inInterceptors>
+		<jaxws:outInterceptors>
+			<ref bean="logOut" />
+		</jaxws:outInterceptors>
+	</jaxws:client>
+
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -21,4 +28,7 @@
 
 	<context:component-scan base-package="org.luke.component" />
 
+
+	<bean id="logIn" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+	<bean id="logOut" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
 </beans>
