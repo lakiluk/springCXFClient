@@ -5,6 +5,8 @@ import org.luke.component.Employee;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import service.HelloWorld;
+
 public class ApplicationStart {
 
 	private static final Logger logger = Logger
@@ -16,5 +18,7 @@ public class ApplicationStart {
 		Employee employeeBean = ctx.getBean(Employee.class);
 		logger.info("Employee bean:" + employeeBean.getName() + " "
 				+ employeeBean.getJob());
+		HelloWorld helloWorldService= (HelloWorld) ctx.getBean("helloClient");
+		System.out.println(helloWorldService.sayHi("dupa"));
 	}
 }
